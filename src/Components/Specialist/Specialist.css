@@ -1,0 +1,4 @@
+.h-fill-available {
+    height: -webkit-fill-available;
+    height: fill-available; /* fallback for other browsers */
+  }
