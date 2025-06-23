@@ -1,29 +1,20 @@
-import TopSection from "./Components/TopSection/TopSection";
 import NavBar from "./Components/NavBar/NavBar";
-import HeroSection from "./Components/HeroSection/HeroSection";
-import DiscountCard from "./Components/DiscountCard/DiscountCard";
-import SpecialisationCard from "./Components/SpecialisationCard/SpecialisationCard";
-import Specialist from "./Components/Specialist/Specialist";
-import Patient from "./Components/Patient/Patient";
-import Blog from "./Components/Blog/Blog";
-import Review from "./Components/Review/Review";
-import FAQSection from "./Components/FAQsection/FAQsection";
+import HomePageRoute from "./Components/Routes/HomePageRoute";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Medical from "./Components/Routes/Medical";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePageRoute />,
+  },
+  {
+    path: "/Medical",
+    element: <Medical />,
+  },
+]);
 function App() {
-  return (
-    <>
-      <TopSection />
-      <NavBar />
-      <HeroSection />
-      <DiscountCard />
-      <SpecialisationCard />
-      <Specialist />
-      <Patient />
-      <Blog />
-      <Review />
-      <FAQSection />
-    </>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;
