@@ -2,10 +2,13 @@ import image from "../../assets/doctorimg.svg";
 import { IoIosSearch } from "react-icons/io";
 import logo from "../../assets/Doctor.png";
 import img from "../../assets/Drugstore.png";
+import { useState } from "react";
 import img2 from "../../assets/Hospital.png";
 import img3 from "../../assets/Capsule.png";
 import img4 from "../../assets/Ambulance.png";
 import { Link } from "react-router-dom";
+import { useStates, useCities } from "../../data-fetching/data-fetch";
+
 const cards = [
   { id: 1, label: "Doctors", img: logo },
   { id: 2, label: "Drugstore", img: img },
@@ -15,6 +18,17 @@ const cards = [
 ];
 
 const HeroSection = () => {
+  const [selectstate, setSelectState] = useState("");
+  const [selectcity, setSelectCity] = useState("");
+  const states = useStates();
+  const cities = useCities(selectstate);
+  const handleState = (e) => {
+    setSelectState(e.target.value);
+  };
+
+  const handleCity = (e) => {
+    setSelectCity(e.target.value);
+  };
   return (
     <>
       {/* Hero Section */}
@@ -51,11 +65,17 @@ const HeroSection = () => {
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                 <IoIosSearch className="h-5 w-5 text-gray-400" />
               </span>
-              <select className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:font-[poppins]">
+              <select
+                onChange={handleState}
+                value={selectstate}
+                className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:font-[poppins]"
+              >
                 <option value="">State</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                {states.map((state) => (
+                  <option key={state} value={state}>
+                    {state}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -64,11 +84,18 @@ const HeroSection = () => {
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                 <IoIosSearch className="h-5 w-5 text-gray-400" />
               </span>
-              <select className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:font-[poppins]">
+              <select
+                onChange={handleCity}
+                value={selectcity}
+                className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:font-[poppins]"
+              >
                 <option value="">City</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                {cities &&
+                  cities.map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
               </select>
             </div>
 
