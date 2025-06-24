@@ -18,7 +18,6 @@ const NavBar = ({ check }) => {
         <h4 className="text-lg font-semibold text-[#2AA8FF]">Medify</h4>
       </div>
 
-      {/* Links + Button */}
       <div className="flex flex-col md:flex-row md:items-center md:gap-6 w-full md:w-auto">
         <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 text-center">
           <Link

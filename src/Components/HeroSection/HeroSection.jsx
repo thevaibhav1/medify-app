@@ -8,6 +8,7 @@ import img3 from "../../assets/Capsule.png";
 import img4 from "../../assets/Ambulance.png";
 import { Link } from "react-router-dom";
 import { useStates, useCities } from "../../data-fetching/data-fetch";
+import SearchForm from "../SearchForm/SearchForm";
 
 const cards = [
   { id: 1, label: "Doctors", img: logo },
@@ -52,63 +53,12 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Image Section */}
         <div className="w-full md:w-1/2 flex justify-center xl:w-2/5">
           <img src={image} alt="doctor" className="w-4/5 md:w-full h-auto" />
         </div>
 
-        {/* Search Form */}
         <div className="absolute m-auto bg-white rounded-2xl shadow-xl w-[90%] sm:w-[80%] md:text-[25px] mt-6 sm:left-0 top-[80%] sm:right-0 md:top-[78%] lg:top-[77%] md:w-[92%]">
-          <form className="flex flex-col sm:flex-row gap-4 justify-evenly items-center p-5 mt-5">
-            {/* Input 1 */}
-            <div className="relative w-full sm:w-64 text-[16px]">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <IoIosSearch className="h-5 w-5 text-gray-400" />
-              </span>
-              <select
-                onChange={handleState}
-                value={selectstate}
-                className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:font-[poppins]"
-              >
-                <option value="">State</option>
-                {states.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Input 2 */}
-            <div className="relative w-full sm:w-64 text-[16px]">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <IoIosSearch className="h-5 w-5 text-gray-400" />
-              </span>
-              <select
-                onChange={handleCity}
-                value={selectcity}
-                className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:font-[poppins]"
-              >
-                <option value="">City</option>
-                {cities &&
-                  cities.map((city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  ))}
-              </select>
-            </div>
-
-            {/* Submit Button */}
-            <Link to="/Medical">
-              <button
-                type="submit"
-                className="bg-blue-500 text-white rounded-md hover:bg-blue-600 transition  font-poppins py-2 w-[15%] text-[16px] min-w-20"
-              >
-                Submit
-              </button>
-            </Link>
-          </form>
+          <SearchForm />
 
           <h2 className="font-poppins font-medium text-[20px] leading-[20px] tracking-[0.4px] text-[#102851] text-center m-5">
             You may be looking for
