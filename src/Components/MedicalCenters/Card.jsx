@@ -21,9 +21,9 @@ const Card = ({ hosname, hosstate, hoscity, hosrating, hosAdd }) => {
 
           <div className="font-[poppins]">
             <h3 className="text-[#14BEF0] font-semibold text-lg">{hosname}</h3>
-            <p className="text-[#414146] font-bold">
+            <li className="text-[#414146] font-bold">
               {hoscity}, {hosstate}
-            </p>
+            </li>
             <p className="text-[#414146] text-sm">{hosAdd}</p>
             <p className="text-blue-600 text-sm cursor-pointer">more</p>
 
