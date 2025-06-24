@@ -2,12 +2,9 @@ import image from "../../assets/doctorimg.svg";
 import { IoIosSearch } from "react-icons/io";
 import logo from "../../assets/Doctor.png";
 import img from "../../assets/Drugstore.png";
-import { useState } from "react";
 import img2 from "../../assets/Hospital.png";
 import img3 from "../../assets/Capsule.png";
 import img4 from "../../assets/Ambulance.png";
-import { Link } from "react-router-dom";
-import { useStates, useCities } from "../../data-fetching/Datafetch";
 import SearchForm from "../SearchForm/SearchForm";
 
 const cards = [
@@ -19,14 +16,6 @@ const cards = [
 ];
 
 const HeroSection = () => {
-  const [selectstate, setSelectState] = useState("");
-  const [selectcity, setSelectCity] = useState("");
-  const states = useStates();
-  const cities = useCities(selectstate);
-  const handleState = (e) => {
-    setSelectState(e.target.value);
-  };
-
   const handleCity = (e) => {
     setSelectCity(e.target.value);
   };

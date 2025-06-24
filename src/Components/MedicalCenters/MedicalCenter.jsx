@@ -5,8 +5,11 @@ import { IoIosSearch } from "react-icons/io";
 import { FaRegCheckCircle } from "react-icons/fa";
 import MedicalCards from "./MedicalCards";
 import SearchForm from "../SearchForm/SearchForm";
-
+import { useContext } from "react";
+import { Context } from "../../store/Context";
 const MedicalCenter = () => {
+  const { hospitals, selectedCity } = useContext(Context);
+  console.log(hospitals);
   return (
     <>
       <div className="bg-[linear-gradient(81deg,_#E7F0FF_9.01%,_rgba(232,241,255,0.47)_89.11%)] pb-20 ">
@@ -21,9 +24,9 @@ const MedicalCenter = () => {
 
         <div className="mt-30 ">
           <div className="flex justify-center items-center flex-col ">
-            <p className="font-[poppins] font-medium w-[80%] text-[24px] leading-[100%] tracking-[0]  align-middle">
-              15 medical centers available in Alaska
-            </p>
+            <h1 className="font-[poppins] font-medium w-[80%] text-[24px] leading-[100%] tracking-[0]  align-middle">
+              {hospitals.length} medical centers available in {selectedCity}
+            </h1>
             <p className="font-[poppins] font-normal w-[80%] flex text-[16px] gap-2 leading-[100%] tracking-[0] align-middle">
               <FaRegCheckCircle /> Book appointments with minimum wait-time &
               verified doctor details

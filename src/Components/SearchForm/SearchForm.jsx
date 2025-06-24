@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
-import { useStates, useCities } from "../../data-fetching/Datafetch";
-import { useState } from "react";
-const SearchForm = () => {
-  const [selectstate, setSelectState] = useState("");
-  const [selectcity, setSelectCity] = useState("");
-  const states = useStates();
-  const cities = useCities(selectstate);
-  const handleState = (e) => {
-    setSelectState(e.target.value);
-  };
+import { useContext } from "react";
+import { Context } from "../../store/Context";
 
-  const handleCity = (e) => {
-    setSelectCity(e.target.value);
-  };
+const SearchForm = () => {
+  const {
+    selectstate,
+    setSelectedState,
+    selectcity,
+    setSelectedCity,
+    states,
+    cities,
+  } = useContext(Context);
+
+  const handleState = (e) => setSelectedState(e.target.value);
+  const handleCity = (e) => setSelectedCity(e.target.value);
   return (
     <form className="flex flex-col sm:flex-row gap-4 justify-evenly items-center p-5 mt-5">
       <div className="relative w-full sm:w-64 text-[16px]" id="state">
