@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { Context } from "../../store/Context";
 import { useNavigate } from "react-router-dom";
@@ -14,12 +14,15 @@ const SearchForm = () => {
     fetchHospitals,
   } = useContext(Context);
 
+  const [showStateDropdown, setShowStateDropdown] = useState(false);
+  const [showCityDropdown, setShowCityDropdown] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // prevent page reload
-    await fetchHospitals(); // fetch data
-    navigate("/Medical"); // redirect to hospital page
+    e.preventDefault();
+    await fetchHospitals();
+    navigate("/Medical");
   };
 
   return (
@@ -27,45 +30,71 @@ const SearchForm = () => {
       onSubmit={handleSubmit}
       className="flex flex-col sm:flex-row gap-4 justify-evenly items-center p-5 mt-5"
     >
-      {/* State Select */}
       <div id="state" className="relative w-full sm:w-64 text-[16px]">
-        <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-          <IoIosSearch className="h-5 w-5 text-gray-400" />
-        </span>
-        <select
-          onChange={(e) => setSelectedState(e.target.value)}
-          value={selectedState}
-          className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        <div
+          onClick={() => {
+            setShowStateDropdown((prev) => !prev);
+            setShowCityDropdown(false);
+          }}
+          className="border px-4 py-2 rounded cursor-pointer bg-white flex items-center justify-between"
         >
-          <option value="">State</option>
-          {states.map((state) => (
-            <option key={state} value={state}>
-              {state}
-            </option>
-          ))}
-        </select>
+          <span>{selectedState || "Select State"}</span>
+          <IoIosSearch className="text-gray-400" />
+        </div>
+        {showStateDropdown && (
+          <ul className="absolute z-10 bg-white border rounded w-full max-h-40 overflow-y-auto mt-1 shadow">
+            {states.map((state) => (
+              <li
+                key={state}
+                className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+                onClick={() => {
+                  setSelectedState(state);
+                  setSelectedCity("");
+                  setShowStateDropdown(false);
+                }}
+              >
+                {state}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
-      {/* City Select */}
+      {/* Custom City Dropdown */}
       <div id="city" className="relative w-full sm:w-64 text-[16px]">
-        <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-          <IoIosSearch className="h-5 w-5 text-gray-400" />
-        </span>
-        <select
-          onChange={(e) => setSelectedCity(e.target.value)}
-          value={selectedCity}
-          className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        <div
+          onClick={() => {
+            if (selectedState) {
+              setShowCityDropdown((prev) => !prev);
+              setShowStateDropdown(false);
+            }
+          }}
+          className={`border px-4 py-2 rounded cursor-pointer bg-white flex items-center justify-between ${
+            !selectedState ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
-          <option value="">City</option>
-          {cities.map((city) => (
-            <option key={city} value={city}>
-              {city}
-            </option>
-          ))}
-        </select>
+          <span>{selectedCity || "Select City"}</span>
+          <IoIosSearch className="text-gray-400" />
+        </div>
+        {showCityDropdown && selectedState && (
+          <ul className="absolute z-10 bg-white border rounded w-full max-h-40 overflow-y-auto mt-1 shadow">
+            {cities.map((city) => (
+              <li
+                key={city}
+                className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+                onClick={() => {
+                  setSelectedCity(city);
+                  setShowCityDropdown(false);
+                }}
+              >
+                {city}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
-      {/* Submit */}
+      {/* Submit Button */}
       <button
         id="searchBtn"
         type="submit"
