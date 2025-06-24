@@ -7,7 +7,7 @@ import img2 from "../../assets/Hospital.png";
 import img3 from "../../assets/Capsule.png";
 import img4 from "../../assets/Ambulance.png";
 import { Link } from "react-router-dom";
-import { useStates, useCities } from "../../data-fetching/data-fetch";
+import { useStates, useCities } from "../../data-fetching/Datafetch";
 import SearchForm from "../SearchForm/SearchForm";
 
 const cards = [

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
-import { useStates, useCities } from "../../data-fetching/data-fetch";
+import { useStates, useCities } from "../../data-fetching/Datafetch";
 import { useState } from "react";
 const SearchForm = () => {
   const [selectstate, setSelectState] = useState("");

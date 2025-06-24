@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-// ✅ Hook to fetch states
 export const useStates = () => {
   const [states, setStates] = useState([]);
 
