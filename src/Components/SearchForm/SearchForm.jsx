@@ -1,30 +1,41 @@
-import { Link } from "react-router-dom";
-import { IoIosSearch } from "react-icons/io";
 import { useContext } from "react";
+import { IoIosSearch } from "react-icons/io";
 import { Context } from "../../store/Context";
+import { useNavigate } from "react-router-dom";
 
 const SearchForm = () => {
   const {
-    selectstate,
+    selectedState,
     setSelectedState,
-    selectcity,
+    selectedCity,
     setSelectedCity,
     states,
     cities,
+    fetchHospitals,
   } = useContext(Context);
 
-  const handleState = (e) => setSelectedState(e.target.value);
-  const handleCity = (e) => setSelectedCity(e.target.value);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // prevent page reload
+    await fetchHospitals(); // fetch data
+    navigate("/Medical"); // redirect to hospital page
+  };
+
   return (
-    <form className="flex flex-col sm:flex-row gap-4 justify-evenly items-center p-5 mt-5">
-      <div className="relative w-full sm:w-64 text-[16px]" id="state">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col sm:flex-row gap-4 justify-evenly items-center p-5 mt-5"
+    >
+      {/* State Select */}
+      <div className="relative w-full sm:w-64 text-[16px]">
         <span className="absolute inset-y-0 left-0 flex items-center pl-3">
           <IoIosSearch className="h-5 w-5 text-gray-400" />
         </span>
         <select
-          onChange={handleState}
-          value={selectstate}
-          className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:font-[poppins]"
+          onChange={(e) => setSelectedState(e.target.value)}
+          value={selectedState}
+          className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">State</option>
           {states.map((state) => (
@@ -35,36 +46,34 @@ const SearchForm = () => {
         </select>
       </div>
 
-      <div className="relative w-full sm:w-64 text-[16px]" id="city">
+      {/* City Select */}
+      <div className="relative w-full sm:w-64 text-[16px]">
         <span className="absolute inset-y-0 left-0 flex items-center pl-3">
           <IoIosSearch className="h-5 w-5 text-gray-400" />
         </span>
         <select
-          onChange={handleCity}
-          value={selectcity}
-          className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:font-[poppins]"
+          onChange={(e) => setSelectedCity(e.target.value)}
+          value={selectedCity}
+          className="pl-10 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">City</option>
-          {cities &&
-            cities.map((city) => (
-              <option key={city} value={city}>
-                {city}
-              </option>
-            ))}
+          {cities.map((city) => (
+            <option key={city} value={city}>
+              {city}
+            </option>
+          ))}
         </select>
       </div>
 
-      {/* Submit Button */}
-      <Link to="/Medical">
-        <button
-          type="submit"
-          id="searchBtn"
-          className="bg-blue-500 text-white rounded-md hover:bg-blue-600 transition  font-poppins py-2 w-[15%] text-[16px] min-w-20"
-        >
-          Submit
-        </button>
-      </Link>
+      {/* Submit */}
+      <button
+        type="submit"
+        className="bg-blue-500 text-white rounded-md hover:bg-blue-600 transition font-poppins py-2 w-[15%] text-[16px] min-w-20"
+      >
+        Submit
+      </button>
     </form>
   );
 };
+
 export default SearchForm;

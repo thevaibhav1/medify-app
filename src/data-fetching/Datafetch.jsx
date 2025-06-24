@@ -35,21 +35,21 @@ export const useCities = (state) => {
   return cities;
 };
 
-export const useHospitals = (state, city) => {
-  const [hospitals, setHospitals] = useState([]);
+// export const useHospitals = (state, city) => {
+//   const [hospitals, setHospitals] = useState([]);
 
-  useEffect(() => {
-    if (!state || !city) return;
+//   useEffect(() => {
+//     if (!state || !city) return;
 
-    const fetchData = async () => {
-      const res = await fetch(
-        `https://meddata-backend.onrender.com/data?state=${state}&city=${city}`
-      );
-      const data = await res.json();
-      setHospitals(data);
-    };
-    fetchData();
-  }, [state, city]);
+//     const fetchData = async () => {
+//       const res = await fetch(
+//         `https://meddata-backend.onrender.com/data?state=${state}&city=${city}`
+//       );
+//       const data = await res.json();
+//       setHospitals(data);
+//     };
+//     fetchData();
+//   }, [state, city]);
 
-  return hospitals;
-};
+//   return hospitals;
+// };
