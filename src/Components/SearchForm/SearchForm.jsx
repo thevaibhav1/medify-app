@@ -28,7 +28,7 @@ const SearchForm = () => {
       className="flex flex-col sm:flex-row gap-4 justify-evenly items-center p-5 mt-5"
     >
       {/* State Select */}
-      <div className="relative w-full sm:w-64 text-[16px]">
+      <div id="state" className="relative w-full sm:w-64 text-[16px]">
         <span className="absolute inset-y-0 left-0 flex items-center pl-3">
           <IoIosSearch className="h-5 w-5 text-gray-400" />
         </span>
@@ -47,7 +47,7 @@ const SearchForm = () => {
       </div>
 
       {/* City Select */}
-      <div className="relative w-full sm:w-64 text-[16px]">
+      <div id="city" className="relative w-full sm:w-64 text-[16px]">
         <span className="absolute inset-y-0 left-0 flex items-center pl-3">
           <IoIosSearch className="h-5 w-5 text-gray-400" />
         </span>
@@ -67,6 +67,7 @@ const SearchForm = () => {
 
       {/* Submit */}
       <button
+        id="searchBtn"
         type="submit"
         className="bg-blue-500 text-white rounded-md hover:bg-blue-600 transition font-poppins py-2 w-[15%] text-[16px] min-w-20"
       >
