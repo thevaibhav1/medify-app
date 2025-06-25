@@ -25,7 +25,8 @@ const MedicalCenter = () => {
         <div className="mt-30 ">
           <div className="flex justify-center items-center flex-col ">
             <h1 className="font-[poppins] font-medium w-[80%] text-[24px] leading-[100%] tracking-[0]  align-middle">
-              {hospitals.length} medical centers available in {selectedCity}
+              {hospitals.length} medical centers available in{" "}
+              {selectedCity.toLowerCase()}
             </h1>
             <p className="font-[poppins] font-normal w-[80%] flex text-[16px] gap-2 leading-[100%] tracking-[0] align-middle">
               <FaRegCheckCircle /> Book appointments with minimum wait-time &
