@@ -99,7 +99,7 @@ const SearchForm = () => {
         type="submit"
         className="bg-blue-500 text-white rounded-md hover:bg-blue-600 transition font-poppins py-2 w-[15%] text-[16px] min-w-20"
       >
-        Submit
+        Search
       </button>
     </form>
   );
