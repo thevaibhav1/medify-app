@@ -10,21 +10,33 @@ import Review from "../Review/Review";
 import FAQSection from "../FAQsection/FAQsection";
 import DownloadForm from "../DownloadForm/DownloadForm";
 import About from "../About/About";
+import { Context } from "../../store/Context";
+import { useContext } from "react";
+import Medical from "./Medical";
 const HomePageRoute = () => {
+  const { checkcomp } = useContext(Context);
+  console.log("check in HomePageRoute", checkcomp);
+
   return (
     <>
-      <TopSection />
-      <NavBar check={true} />
-      <HeroSection />
-      <DiscountCard />
-      <SpecialisationCard />
-      <Specialist />
-      <Patient />
-      <Blog />
-      <Review />
-      <FAQSection />
-      <DownloadForm />
-      <About />
+      {checkcomp ? (
+        <Medical />
+      ) : (
+        <>
+          <TopSection />
+          <NavBar check={true} />
+          <HeroSection />
+          <DiscountCard />
+          <SpecialisationCard />
+          <Specialist />
+          <Patient />
+          <Blog />
+          <Review />
+          <FAQSection />
+          <DownloadForm />
+          <About />
+        </>
+      )}
     </>
   );
 };

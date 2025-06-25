@@ -7,7 +7,7 @@ const ContextProvider = () => {
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [hospitals, setHospitals] = useState([]);
-
+  const [checkcomp, setCheck] = useState(false);
   const states = useStates();
   const cities = useCities(selectedState);
 
@@ -21,6 +21,10 @@ const ContextProvider = () => {
     setHospitals(data);
   };
 
+  const handleCheck = () => {
+    setCheck(true);
+  };
+
   return (
     <Context.Provider
       value={{
@@ -32,6 +36,8 @@ const ContextProvider = () => {
         cities,
         hospitals,
         fetchHospitals,
+        handleCheck,
+        checkcomp,
       }}
     >
       <App />

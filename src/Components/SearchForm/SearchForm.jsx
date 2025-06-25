@@ -12,17 +12,16 @@ const SearchForm = () => {
     states,
     cities,
     fetchHospitals,
+    handleCheck,
   } = useContext(Context);
 
   const [showStateDropdown, setShowStateDropdown] = useState(false);
   const [showCityDropdown, setShowCityDropdown] = useState(false);
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await fetchHospitals();
-    navigate("/Medical");
+    handleCheck();
   };
 
   return (

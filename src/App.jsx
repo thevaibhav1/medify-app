@@ -9,8 +9,8 @@ const router = createBrowserRouter([
     element: <HomePageRoute />,
   },
   {
-    path: "/Medical",
-    element: <Medical />,
+    path: "/my-booking",
+    element: <h2>My-booking</h2>,
   },
 ]);
 function App() {
