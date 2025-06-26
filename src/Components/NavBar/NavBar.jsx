@@ -4,7 +4,7 @@ import logo from "../../assets/Vector.svg";
 const NavBar = ({ check }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/my-booking");
+    navigate("/my-bookings");
   };
   return (
     <div
