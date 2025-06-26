@@ -2,6 +2,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import HomePageRoute from "./Components/Routes/HomePageRoute";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Medical from "./Components/Routes/Medical";
+import Bookings from "./Components/Routes/Bookings";
 
 const router = createBrowserRouter([
   {
@@ -9,8 +10,8 @@ const router = createBrowserRouter([
     element: <HomePageRoute />,
   },
   {
-    path: "/my-booking",
-    element: <h2>My-booking</h2>,
+    path: "/my-bookings",
+    element: <Bookings />,
   },
 ]);
 function App() {

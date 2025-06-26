@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/Vector.svg";
 
 const NavBar = ({ check }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/my-booking");
+  };
   return (
     <div
       className={`flex flex-col md:flex-row justify-around items-center ${
@@ -57,7 +61,10 @@ const NavBar = ({ check }) => {
             Facilities
           </a>
         </div>
-        <button className="bg-[#2AA8FF] text-white px-4 py-2 rounded mt-3 md:mt-0 font-poppins font-medium text-[14px]">
+        <button
+          onClick={handleClick}
+          className="bg-[#2AA8FF] text-white px-4 py-2 rounded mt-3 md:mt-0 font-poppins font-medium text-[14px]"
+        >
           My Bookings
         </button>
       </div>

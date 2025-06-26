@@ -6,10 +6,17 @@ import "swiper/css/navigation";
 import Slottime from "./Slottime";
 import { generateDateTabs } from "../../utils/generateDateTabs";
 
-const Slot = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+const Slot = ({ id }) => {
+  const [info, setInfo] = useState("");
 
   const dateTabs = generateDateTabs();
+
+  const handleDate = (date) => {
+    setInfo({
+      date: date,
+      id: id,
+    });
+  };
 
   return (
     <div className="mt-4 px-4">
@@ -23,13 +30,13 @@ const Slot = () => {
           640: { slidesPerView: 3 },
           1024: { slidesPerView: 3 },
         }}
-        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
       >
         {dateTabs.map((item, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={item.date}>
             <div
+              onClick={() => handleDate(item.date)}
               className={`text-center cursor-pointer pb-2 ${
-                index === activeIndex
+                item.date === info.date
                   ? "border-b-4 border-blue-500"
                   : "border-b border-gray-200"
               }`}
@@ -44,7 +51,7 @@ const Slot = () => {
       </Swiper>
 
       {/* Time Slots */}
-      <Slottime />
+      <Slottime selectDate={info} />
     </div>
   );
 };

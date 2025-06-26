@@ -34,7 +34,7 @@ const MedicalCenter = () => {
             </p>
           </div>
         </div>
-        <MedicalCards />
+        <MedicalCards check={true} />
       </div>
     </>
   );

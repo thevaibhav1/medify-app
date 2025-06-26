@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Context } from "./Context";
 import App from "../App";
 import { useStates, useCities } from "../data-fetching/Datafetch";
@@ -8,6 +8,8 @@ const ContextProvider = () => {
   const [selectedCity, setSelectedCity] = useState("");
   const [hospitals, setHospitals] = useState([]);
   const [checkcomp, setCheck] = useState(false);
+  const [slot, setSlot] = useState("");
+  const [appointment, setAppointment] = useState([]);
   const states = useStates();
   const cities = useCities(selectedState);
 
@@ -25,6 +27,18 @@ const ContextProvider = () => {
     setCheck(true);
   };
 
+  const handleSlot = ({ slot, date, id }) => {
+    setSlot({
+      slot,
+      date,
+      id,
+    });
+  };
+
+  useEffect(() => {
+    console.log("Selected Slot Updated:", slot);
+  }, [slot]);
+
   return (
     <Context.Provider
       value={{
@@ -38,6 +52,8 @@ const ContextProvider = () => {
         fetchHospitals,
         handleCheck,
         checkcomp,
+        handleSlot,
+        slot,
       }}
     >
       <App />

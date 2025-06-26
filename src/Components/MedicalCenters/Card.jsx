@@ -3,7 +3,15 @@ import { GrLike } from "react-icons/gr";
 import Slot from "./Slot";
 import { useState } from "react";
 
-const Card = ({ hosname, hosstate, hoscity, hosrating, hosAdd }) => {
+const Card = ({
+  hosname,
+  hosstate,
+  hoscity,
+  hosrating,
+  hosAdd,
+  id,
+  ischeck,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -40,21 +48,22 @@ const Card = ({ hosname, hosstate, hoscity, hosrating, hosAdd }) => {
           </div>
         </div>
 
-        {/* Right Button Side */}
-        <div className="flex flex-col items-end justify-end">
-          <p className="text-green-600 font-semibold text-sm">
-            Available Today
-          </p>
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="mt-2 bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-          >
-            Book FREE Center Visit
-          </button>
-        </div>
+        {ischeck && (
+          <div className="flex flex-col items-end justify-end">
+            <p className="text-green-600 font-semibold text-sm">
+              Available Today
+            </p>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="mt-2 bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+            >
+              Book FREE Center Visit
+            </button>
+          </div>
+        )}
       </div>
 
-      {isOpen && <Slot />}
+      {ischeck && isOpen && <Slot key={id} id={id} />}
     </div>
   );
 };

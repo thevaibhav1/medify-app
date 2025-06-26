@@ -15,7 +15,7 @@ import { useContext } from "react";
 import Medical from "./Medical";
 const HomePageRoute = () => {
   const { checkcomp } = useContext(Context);
-  console.log("check in HomePageRoute", checkcomp);
+  // console.log( checkcomp);
 
   return (
     <>
