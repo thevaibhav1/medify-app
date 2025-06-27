@@ -1,7 +1,8 @@
 import imgcard from "../../assets/MedicalCard/imagecard.png";
 import { GrLike } from "react-icons/gr";
 import Slot from "./Slot";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Context } from "../../store/Context";
 
 const Card = ({
   hosname,
@@ -11,9 +12,13 @@ const Card = ({
   hosAdd,
   id,
   ischeck,
+  slot,
+  date,
+  open,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { appointment } = useContext(Context);
+  console.log(slot, date);
   return (
     <div className="bg-white p-6 rounded-2xl shadow-md">
       <div className="flex flex-col sm:flex-row justify-between gap-4">
@@ -47,7 +52,6 @@ const Card = ({
             </div>
           </div>
         </div>
-
         {ischeck && (
           <div className="flex flex-col items-end justify-end">
             <p className="text-green-600 font-semibold text-sm">
@@ -59,6 +63,17 @@ const Card = ({
             >
               Book FREE Center Visit
             </button>
+          </div>
+        )}
+
+        {open && (
+          <div className="flex gap-5  items-start justify-start">
+            <p className="border-blue-500 font-semibold border text-blue-500 px-4 py-2 text-sm">
+              {slot}
+            </p>
+            <p className="  border text-green-600 border-green-500 text-sm px-4 py-2   transition">
+              {date}
+            </p>
           </div>
         )}
       </div>

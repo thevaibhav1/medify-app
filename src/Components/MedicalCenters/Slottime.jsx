@@ -2,9 +2,9 @@ import { useContext, useState } from "react";
 import { Context } from "../../store/Context";
 
 const Slottime = ({ selectDate }) => {
-  const morning = ["11:30"];
-  const afternoon = ["12:00", "12:30", "1:30", "2:00", "2:30"];
-  const evening = ["6:00", "6:30", "7:00", "7:30"];
+  const morning = ["11:30AM"];
+  const afternoon = ["12:00PM", "12:30PM", "1:30PM", "2:00PM", "2:30PM"];
+  const evening = ["6:00PM", "6:30PM", "7:00PM", "7:30PM"];
   const { handleSlot } = useContext(Context);
   const handleSlots = (ele) => {
     const appointobj = {

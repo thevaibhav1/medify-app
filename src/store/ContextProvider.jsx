@@ -36,9 +36,20 @@ const ContextProvider = () => {
   };
 
   useEffect(() => {
-    console.log("Selected Slot Updated:", slot);
+    if (slot.slot === undefined) return;
+    setAppointment((prev) => {
+      return [
+        {
+          time: slot.slot,
+          date: slot.date,
+          id: slot.id,
+          hospital: hospitals.filter((hos) => hos["Provider ID"] === slot.id),
+        },
+        ...prev,
+      ];
+    });
   }, [slot]);
-
+  console.log(appointment);
   return (
     <Context.Provider
       value={{
@@ -54,6 +65,7 @@ const ContextProvider = () => {
         checkcomp,
         handleSlot,
         slot,
+        appointment,
       }}
     >
       <App />

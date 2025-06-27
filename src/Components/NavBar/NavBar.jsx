@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/Vector.svg";
+import { useContext } from "react";
+import { Context } from "../../store/Context";
 
 const NavBar = ({ check }) => {
   const navigate = useNavigate();
