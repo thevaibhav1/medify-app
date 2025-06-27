@@ -8,7 +8,7 @@ const ContextProvider = () => {
   const [selectedCity, setSelectedCity] = useState("");
   const [hospitals, setHospitals] = useState([]);
   const [checkcomp, setCheck] = useState(false);
-  const [slot, setSlot] = useState("");
+  const [slot, setSlot] = useState({});
   const [appointment, setAppointment] = useState([]);
   const states = useStates();
   const cities = useCities(selectedState);
@@ -28,28 +28,51 @@ const ContextProvider = () => {
   };
 
   const handleSlot = ({ slot, date, id }) => {
-    setSlot({
-      slot,
-      date,
-      id,
-    });
+    setSlot({ slot, date, id });
   };
 
   useEffect(() => {
     if (slot.slot === undefined) return;
-    setAppointment((prev) => {
-      return [
-        {
-          time: slot.slot,
-          date: slot.date,
-          id: slot.id,
-          hospital: hospitals.filter((hos) => hos["Provider ID"] === slot.id),
-        },
-        ...prev,
-      ];
-    });
+
+    const matchedHospitals = hospitals.filter(
+      (hos) => hos["Provider ID"] === slot.id
+    );
+
+    if (matchedHospitals.length === 0) return;
+
+    setAppointment((prev) => [
+      {
+        time: slot.slot,
+        date: slot.date,
+        id: slot.id,
+        hospital: matchedHospitals,
+      },
+      ...prev,
+    ]);
   }, [slot]);
-  console.log(appointment);
+
+  useEffect(() => {
+    if (appointment.length > 0) {
+      localStorage.setItem("bookings", JSON.stringify(appointment));
+    }
+  }, [appointment]);
+
+  useEffect(() => {
+    const data = localStorage.getItem("bookings");
+    try {
+      const parsed = JSON.parse(data);
+      if (Array.isArray(parsed)) {
+        const validData = parsed.filter((item) => Array.isArray(item.hospital));
+        setAppointment(validData);
+      } else {
+        setAppointment([]);
+      }
+    } catch (error) {
+      console.error("Failed ", error);
+      setAppointment([]);
+    }
+  }, []);
+
   return (
     <Context.Provider
       value={{
