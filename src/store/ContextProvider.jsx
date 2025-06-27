@@ -61,14 +61,22 @@ const ContextProvider = () => {
     const data = localStorage.getItem("bookings");
     try {
       const parsed = JSON.parse(data);
-      if (Array.isArray(parsed)) {
-        const validData = parsed.filter((item) => Array.isArray(item.hospital));
-        setAppointment(validData);
-      } else {
-        setAppointment([]);
-      }
+      if (!Array.isArray(parsed)) return;
+      const normalized = parsed.map((item) => {
+        if (Array.isArray(item.hospital)) return item;
+        return {
+          time: item.bookingTime || item.time,
+          date: item.bookingDate || item.date,
+          id: item["Provider ID"] || Math.random().toString(36).slice(2), // fallback id
+          hospital: [item],
+        };
+      });
+      setAppointment(normalized);
     } catch (error) {
-      console.error("Failed ", error);
+      console.error(
+        "Failed to parse or normalize bookings from localStorage:",
+        error
+      );
       setAppointment([]);
     }
   }, []);
