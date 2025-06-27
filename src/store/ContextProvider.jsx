@@ -67,16 +67,13 @@ const ContextProvider = () => {
         return {
           time: item.bookingTime || item.time,
           date: item.bookingDate || item.date,
-          id: item["Provider ID"] || Math.random().toString(36).slice(2), // fallback id
+          id: item["Provider ID"],
           hospital: [item],
         };
       });
       setAppointment(normalized);
     } catch (error) {
-      console.error(
-        "Failed to parse or normalize bookings from localStorage:",
-        error
-      );
+      console.error("Failed to load", error);
       setAppointment([]);
     }
   }, []);
